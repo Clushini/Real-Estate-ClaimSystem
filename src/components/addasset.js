@@ -11,7 +11,9 @@ class Addasset extends Component {
       State: "AL",
       county: "",
       type: "Retail Tenant Property",
-      apns: [{value: ""}]
+      apns: [{value: ""}],
+      note: false,
+      button: 1
     }
 
     this.handleClose = this.handleClose.bind(this);
@@ -20,6 +22,7 @@ class Addasset extends Component {
     this.delApn = this.delApn.bind(this);
     this.updateApn = this.updateApn.bind(this);
     this.submit = this.submit.bind(this);
+    this.handleChecked = this.handleChecked.bind(this);
   }
 
   handleClose() {
@@ -31,6 +34,12 @@ class Addasset extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+  }
+
+  handleChecked(e) {
+      this.setState({
+        [e.target.name]: !this.state[e.target.name]
+      })
   }
 
   addApn() {
@@ -83,6 +92,7 @@ class Addasset extends Component {
         'Fuel Service Retail Property', 'Medical Tenant Property', 'Mixed Use Commercial Property', 'Fractured Condominium Portfolios',
         'Mini-Storage Property', 'Parking Garage Property', 'Secured Private Notes'
         ];
+    console.log(this.state.note);
     return (
         <div className="modalwrap modal_addasset">
             <div className="topbar topbar_blue">
@@ -159,8 +169,14 @@ class Addasset extends Component {
                     </select>
                 </div>
                 <div className="modalfooter">
-                    <div className="submitbtn" onClick={() => this.submit("add")}>Add Asset</div>
-                    <div className="submitbtn submitorange" onClick={() => this.submit("claim")}>Claim Asset</div>
+                    <div className="footerextra">
+                        <input type="checkbox" name="note" onChange={this.handleChecked} checked={this.state.note}/>
+                        <div>Note Asset</div>
+                    </div>
+                    <div className="buttonwrap">
+                        {this.state.button === 1 && <div className="submitbtn" onClick={() => this.submit("add")}>Add Asset</div>}
+                        {this.state.button === 2 && <div className="submitbtn submitorange" onClick={() => this.submit("claim")}>Claim Asset</div>}
+                    </div>
                 </div>
             </div>
         </div>

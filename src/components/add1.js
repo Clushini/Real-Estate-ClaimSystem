@@ -2,91 +2,90 @@ import React, { Component } from 'react';
 import Ohdrop from './ohdrop.js';
 
 class Add1 extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-        show: 0,
-        type: "",
-        aquisition: "",
-        purchaseprice: "",
-        terms: "All Cash - no PMF",
-        operating: [],
-        holding: [],
-        currentoperating: "Operating Company",
-        currentholding: "Holding Company"
+        this.state = {
+            show: 0,
+            type: "",
+            aquisition: "",
+            purchaseprice: "",
+            terms: "All Cash - no PMF",
+            operating: [],
+            holding: [],
+            currentoperating: "Operating Company",
+            currentholding: "Holding Company"
+        }
+
+        this.back = this.back.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.showDrop = this.showDrop.bind(this);
+        this.hideDrop = this.hideDrop.bind(this);
+        this.handleInput = this.handleInput.bind(this);
+        this.nextStep = this.nextStep.bind(this);
+        this.saveCompanyData = this.saveCompanyData.bind(this);
     }
 
-    this.back = this.back.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.showDrop = this.showDrop.bind(this);
-    this.hideDrop = this.hideDrop.bind(this);
-    this.handleInput = this.handleInput.bind(this);
-    this.nextStep = this.nextStep.bind(this);
-    this.saveCompanyData = this.saveCompanyData.bind(this);
-  }
+    nextStep() {
+        this.props.gonext(this.state, "add1");
+    }
 
-  nextStep() {
-    this.props.gonext(this.state, "add1");
-  }
+    handleInput(e) {
+        this.setState({[e.target.name]: e.target.value});
+    }
 
-  handleInput(e) {
-    this.setState({[e.target.name]: e.target.value});
-  }
+    handleClose() {
+        //close modal here, not sure what we are doing here yet
+        console.log("close logic here");
+    }
 
-  handleClose() {
-    //close modal here, not sure what we are doing here yet
-    console.log("close logic here");
-  }
+    back() {
+        this.props.goback();
+    }
 
-  back() {
-    this.props.goback();
-  }
+    showDrop(type) {
+        if (this.state.show) {
+            this.setState({show: 0, type: ""});
+        }
+        else {
+            this.setState({show: 1, type: type});
+        }
+    }
 
-  showDrop(type) {
-    if (this.state.show) {
+    hideDrop(e) {
         this.setState({show: 0, type: ""});
     }
-    else {
-        this.setState({show: 1, type: type});
+
+    componentDidMount() {
+        let dataobj = Object.assign({}, this.props.data);
+        this.setState(dataobj);
     }
-  }
 
-  hideDrop(e) {
-    this.setState({show: 0, type: ""});
-  }
+    saveCompanyData(type, data) {
+        // This is probably a totally trash way to get the name, maybe fix in future
+        let currentname = data[0][Object.keys(data[0])];
+        let current = "current" + this.state.type;
+        console.log(data);
 
-  componentDidMount() {
-    console.log(this.props.data);
-    let dataobj = Object.assign({}, this.props.data);
-    this.setState(dataobj);
-   }
-
-   saveCompanyData(type, data) {
-    // This is probably a totally trash way to get the name, maybe fix in future
-    let currentname = data[0][Object.keys(data[0])];
-    let current = "current" + this.state.type;
-    console.log(data);
-    
-    if(!currentname) {
-        if(this.state.type === "operating") {
-            this.setState({currentoperating: "Operating Company"});
+        if(!currentname) {
+            if(this.state.type === "operating") {
+                this.setState({currentoperating: "Operating Company"});
+            }
+            if(this.state.type === "holding") {
+                this.setState({currentholding: "Holding Company"});
+            }
         }
-        if(this.state.type === "holding") {
-            this.setState({currentholding: "Holding Company"});
+        else {
+            this.setState({[type]: data, [current]: currentname});
         }
     }
-    else {
-        this.setState({[type]: data, [current]: currentname});
-    }
-   }
 
-  render() {
-      let termType = [
-          'All Cash - no PMF', 'Cash & PMF', 'Cash & Assumption of existing Debt Package', 'Cash & Seller Carryback with Assumption of Existing Debt Package',
-          'Cash & Seller Carryback (Property was F&C of any Debt Package)', 'Cash & Property for Property 1031 Exchange', 'Property for Property 1031 Exchange - No Cash Transfer',
-          'Other'
-      ];
+    render() {
+    let termType = [
+        'All Cash - no PMF', 'Cash & PMF', 'Cash & Assumption of existing Debt Package', 'Cash & Seller Carryback with Assumption of Existing Debt Package',
+        'Cash & Seller Carryback (Property was F&C of any Debt Package)', 'Cash & Property for Property 1031 Exchange', 'Property for Property 1031 Exchange - No Cash Transfer',
+        'Other'
+    ];
     return (
         <div className="modalwrap modal_big">
             <div className="topbar topbar_orange">
@@ -95,6 +94,7 @@ class Add1 extends Component {
             </div>
             <div className="modal_contentwrap bigpad">
                 <h1>Please select your Operating Company and Holding Company</h1>
+                <div className="pad40"></div>
                 <div className="dualwrap">
                     <div className="width48">
                         <div className="orangeselect" onClick={() => this.showDrop("operating")}>
@@ -138,13 +138,16 @@ class Add1 extends Component {
                 </div>
 
                 <div className="modalfooter">
-                    <div className="submitbtn submitorange top20" onClick={this.back}>Back</div>
-                    <div className="submitbtn top20" onClick={this.nextStep}>Next</div>
+                    <div></div>
+                    <div className="buttonwrap">
+                        <div className="submitbtn submitorange top20" onClick={this.back}>Back</div>
+                        <div className="submitbtn top20" onClick={this.nextStep}>Next</div>
+                    </div>
                 </div>
             </div>
         </div>
     );
-  }
+    }
 }
 
 export default Add1;
