@@ -101,7 +101,7 @@ class Ohdrop extends Component {
                 <div className="modalfooter">
                     <div></div>
                     <div className="buttonwrap">
-                        <div className="submitbtn smallbtn" onClick={this.saveData}>Save</div>
+                        <div className="submitbtn smallbtn hvr-float-shadow" onClick={this.saveData}>Save</div>
                     </div>
                 </div>
             </div>

@@ -26,7 +26,7 @@ class Add1 extends Component {
 
   render() {
     return (
-        <div className="modalwrap modal_big">
+        <div className="modalwrap modal_big animated slideInRight faster">
             <div className="topbar topbar_orange">
                 Add Asset <a>- Step 3</a>
                 <div className="closebutton" onClick={this.handleClose}>×</div>
@@ -50,9 +50,9 @@ class Add1 extends Component {
                 <div>
                 </div>
                 <div className="buttonwrap">
-                    <div className="submitbtn submitorange top20" onClick={this.back}>Back</div>
-                    <div className="submitbtn submitgrey top20" onClick={this.skipStep}>Skip</div>
-                    <div className="submitbtn top20" onClick={this.nextStep}>Next</div>
+                    <div className="submitbtn submitorange top20 hvr-float-shadow" onClick={this.back}>Back</div>
+                    <div className="submitbtn submitgrey top20 hvr-float-shadow" onClick={this.skipStep}>Skip</div>
+                    <div className="submitbtn top20 hvr-float-shadow" onClick={this.nextStep}>Next</div>
                 </div>
               </div>
             </div>

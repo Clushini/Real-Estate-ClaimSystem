@@ -28,7 +28,7 @@ class Add1 extends Component {
   render() {
     console.log(this.props.summarydata);
     return (
-        <div className="modalwrap modal_big">
+        <div className="modalwrap modal_big animated slideInRight faster">
             <div className="topbar topbar_orange">
                 Add Asset <a>- Summary</a>
                 <div className="closebutton" onClick={this.handleClose}>×</div>
@@ -103,8 +103,8 @@ class Add1 extends Component {
                   }).join(", ")}
                 </div>
                 <div className="buttonwrap">
-                  <div className="submitbtn submitorange top20" onClick={this.back}>Back</div>
-                  <div className="submitbtn top20" onClick={this.nextStep}>Create Asset</div>
+                  <div className="submitbtn submitorange top20 hvr-float-shadow" onClick={this.back}>Back</div>
+                  <div className="submitbtn top20 hvr-float-shadow" onClick={this.nextStep}>Create Asset</div>
                 </div>
               </div>
             </div>

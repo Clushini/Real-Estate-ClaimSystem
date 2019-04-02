@@ -13,7 +13,8 @@ class Addasset extends Component {
       type: "Retail Tenant Property",
       apns: [{value: ""}],
       note: false,
-      button: 1
+      claimasset: true,
+      apnresults: ['123', '234']
     }
 
     this.handleClose = this.handleClose.bind(this);
@@ -92,9 +93,8 @@ class Addasset extends Component {
         'Fuel Service Retail Property', 'Medical Tenant Property', 'Mixed Use Commercial Property', 'Fractured Condominium Portfolios',
         'Mini-Storage Property', 'Parking Garage Property', 'Secured Private Notes'
         ];
-    console.log(this.state.note);
     return (
-        <div className="modalwrap modal_addasset">
+        <div className="modalwrap modal_addasset animated slideInRight faster">
             <div className="topbar topbar_blue">
                 Add Asset
                 <div className="closebutton" onClick={this.handleClose}>×</div>
@@ -174,8 +174,8 @@ class Addasset extends Component {
                         <div>Note Asset</div>
                     </div>
                     <div className="buttonwrap">
-                        {this.state.button === 1 && <div className="submitbtn" onClick={() => this.submit("add")}>Add Asset</div>}
-                        {this.state.button === 2 && <div className="submitbtn submitorange" onClick={() => this.submit("claim")}>Claim Asset</div>}
+                        {!this.state.claimasset && <div className="submitbtn hvr-float-shadow" onClick={() => this.submit("add")}>Add Asset</div>}
+                        {this.state.claimasset && <div className="submitbtn submitorange hvr-float-shadow" onClick={() => this.submit("claim")}>Claim Asset</div>}
                     </div>
                 </div>
             </div>

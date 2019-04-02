@@ -17,14 +17,14 @@ class Add1 extends Component {
   }
 
   nextStep() {
-    this.props.gonext(this.state, "add2");
+    this.props.gonext(this.state, "claim3");
   }
 
   render() {
     return (
         <div className="modalwrap modal_big animated slideInRight faster">
             <div className="topbar topbar_orange">
-                Add Asset <a>- Step 2</a>
+                Claim Asset <a>- Step 2</a>
                 <div className="closebutton" onClick={this.handleClose}>×</div>
             </div>
             <div className="modal_contentwrap bigpad">
